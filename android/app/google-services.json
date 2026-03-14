@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "404770600917",
+    "project_id": "my-project-de-entrega",
+    "storage_bucket": "my-project-de-entrega.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404770600917:android:ac60c59e5223bb70382f5c",
+        "android_client_info": {
+          "package_name": "com.example.procafes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404770600917-l2p5mff1fcmtu3g5gm6qgd0469hk1kcm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZPk6JfiiXqNHS-ND5VWRq5wM39djf9eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404770600917-l2p5mff1fcmtu3g5gm6qgd0469hk1kcm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
