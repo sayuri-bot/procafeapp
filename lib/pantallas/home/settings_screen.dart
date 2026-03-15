@@ -116,7 +116,7 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
                     color: Colors.grey)),
 
             const SizedBox(height: 15),
-
+            //borrar switch innecesario
             _cardSeccion(
               Column(
                 children: [
@@ -134,11 +134,6 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
                       "Vibración", vibracion,
                           (val) {
                         setState(() => vibracion = val);
-                      }),
-                  _switchItem(Icons.email,
-                      "Email diario", emailDiario,
-                          (val) {
-                        setState(() => emailDiario = val);
                       }),
                 ],
               ),
