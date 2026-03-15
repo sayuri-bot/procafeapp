@@ -111,7 +111,7 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
                     color: Colors.grey)),
 
             const SizedBox(height: 15),
-
+            //borrar switch innecesario
             _cardSeccion(
               Column(
                 children: [
