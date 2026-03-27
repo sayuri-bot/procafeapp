@@ -102,27 +102,15 @@ class _HistorialAlertasScreenState extends State<HistorialAlertasScreen> {
   }
 
   /// Agrupa por fecha y devuelve solo la última alerta de cada producto
-  Map<String, List<HistorialModel>> agruparPorFechaUltimaAlerta() {
+  Map<String, List<HistorialModel>> agruparPorFecha() {
     Map<String, List<HistorialModel>> mapa = {};
 
     for (var alerta in alertasFiltradas) {
-      final fechaKey = DateFormat('yyyy-MM-dd').format(DateTime.parse(alerta.fecha));
+      final fechaKey =
+          DateFormat('yyyy-MM-dd').format(DateTime.parse(alerta.fecha));
 
-      if (!mapa.containsKey(fechaKey)) {
-        mapa[fechaKey] = [];
-      }
-
-      final indexExistente =
-          mapa[fechaKey]!.indexWhere((a) => a.productId == alerta.productId);
-
-      if (indexExistente == -1) {
-        mapa[fechaKey]!.add(alerta);
-      } else {
-        final existente = mapa[fechaKey]![indexExistente];
-        if (DateTime.parse(alerta.fecha).isAfter(DateTime.parse(existente.fecha))) {
-          mapa[fechaKey]![indexExistente] = alerta;
-        }
-      }
+      mapa.putIfAbsent(fechaKey, () => []);
+      mapa[fechaKey]!.add(alerta);
     }
 
     return mapa;
@@ -176,6 +164,10 @@ class _HistorialAlertasScreenState extends State<HistorialAlertasScreen> {
       leading: Icon(icon, color: color),
       title: Text(alerta.name),
       subtitle: Text(alerta.mensaje),
+      trailing: Text(
+        DateFormat('HH:mm').format(DateTime.parse(alerta.fecha)),
+        style: const TextStyle(fontSize: 12, color: Colors.grey),
+      ),
     );
   }
 
@@ -187,7 +179,7 @@ class _HistorialAlertasScreenState extends State<HistorialAlertasScreen> {
       );
     }
 
-    final agrupadas = agruparPorFechaUltimaAlerta();
+    final agrupadas = agruparPorFecha();
 
     return Scaffold(
       appBar: AppBar(
@@ -228,26 +220,6 @@ class _HistorialAlertasScreenState extends State<HistorialAlertasScreen> {
                 // Buscador
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Buscar productos",
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                    onChanged: (v) {
-                      if (!mounted) return;
-                      setState(() {
-                        busqueda = v;
-                        aplicarFiltros();
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Filtros
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Row(
                     children: [
                       chipFiltro("Todos", "todos"),
@@ -256,6 +228,7 @@ class _HistorialAlertasScreenState extends State<HistorialAlertasScreen> {
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 10),
                 // Lista de alertas
                 Expanded(
