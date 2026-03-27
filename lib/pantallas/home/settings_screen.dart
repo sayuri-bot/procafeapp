@@ -22,23 +22,11 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
 
   //agregar carga de configuracion desde shared preferences
   Future<void> _cargarConfiguracion() async {
-    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      config.notificacionesApp = prefs.getBool('notificacionesApp') ?? true;
-      config.sonidoAlerta = prefs.getBool('sonidoAlerta') ?? true;
-      config.vibracion = prefs.getBool('vibracion') ?? true;
-      config.modoOscuro = prefs.getBool('modoOscuro') ?? false;
-      config.tiempoSesion = prefs.getString('tiempoSesion') ?? "30 minutos de inactividad";
     });
   }
   //agregar guardado de configuracion en shared preferences
   Future<void> guardarConfiguracion() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('notificacionesApp', config.notificacionesApp);
-    await prefs.setBool('sonidoAlerta', config.sonidoAlerta);
-    await prefs.setBool('vibracion', config.vibracion);
-    await prefs.setBool('modoOscuro', config.modoOscuro);
-    await prefs.setString('tiempoSesion', config.tiempoSesion);
   }
   void _cerrarSesion() {
     context.go('/login');
